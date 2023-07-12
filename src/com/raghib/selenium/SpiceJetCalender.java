@@ -16,6 +16,7 @@ public class SpiceJetCalender {
 	public static WebDriver driver;
 	public static Select selectObject = null;
 	public static Select selectObject1 = null;
+	
 	public static void main(String[] args) {
 		String expectedDate = "12-July-2023";
 		String eDate = expectedDate.split("-")[0];
@@ -23,7 +24,7 @@ public class SpiceJetCalender {
 		String eYear = expectedDate.split("-")[2];
 		System.out.println(eDate+"-"+eMonth+"-"+eYear);
 		
-		System.setProperty("webdriver.chrome.driver","C:\\SELENIUM\\browser-driver\\chromedriver_win32\\chromedriver.exe");
+		System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "\\Driver\\chromedriver.exe");
 		driver = new ChromeDriver();
 		
 		driver.manage().window().maximize();
