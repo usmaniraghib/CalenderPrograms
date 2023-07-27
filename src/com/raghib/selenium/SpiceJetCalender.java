@@ -8,9 +8,12 @@ import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.Select;
 import org.openqa.selenium.support.ui.WebDriverWait;
+
+import io.github.bonigarcia.wdm.WebDriverManager;
 
 public class SpiceJetCalender {
 	public static WebDriver driver;
@@ -18,14 +21,17 @@ public class SpiceJetCalender {
 	public static Select selectObject1 = null;
 	
 	public static void main(String[] args) {
-		String expectedDate = "12-July-2023";
+		String expectedDate = "30-September-2023";
 		String eDate = expectedDate.split("-")[0];
 		String eMonth = expectedDate.split("-")[1];
 		String eYear = expectedDate.split("-")[2];
 		System.out.println(eDate+"-"+eMonth+"-"+eYear);
 		
-		System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "\\Driver\\chromedriver.exe");
-		driver = new ChromeDriver();
+		//System.setProperty("webdriver.chrome.driver", System.getProperty("user.dir") + "\\Driver\\chromedriver.exe");
+		WebDriverManager.chromedriver().setup();
+		ChromeOptions options = new ChromeOptions();
+		options.addArguments("--disable-notifications");
+		driver = new ChromeDriver(options);
 		
 		driver.manage().window().maximize();
 		driver.manage().deleteAllCookies();
@@ -39,9 +45,10 @@ public class SpiceJetCalender {
                 
         /*Dynamic Drop Down - Select Source and Destination*/
 		
-        driver.findElement(By.xpath("//input[@id='ctl00_mainContent_ddl_originStation1_CTXT']")).click();
-        driver.findElement(By.xpath("//input[@value='Delhi (DEL)']")).click();
-        driver.findElement(By.xpath("//input[@value='Bengaluru (BLR)']")).click();		
+        driver.findElement(By.xpath("//*[@id=\"main-container\"]/div/div[1]/div[3]/div[2]/div[3]/div/div[1]/div/div[2]/input")).click();
+        driver.findElement(By.xpath("//*[@id=\"main-container\"]/div/div[1]/div[3]/div[2]/div[3]/div/div[1]/div[2]/div[2]/div[2]/div[2]/div[2]/div[1]/div[2]/div")).click();
+        driver.findElement(By.xpath("//*[@id=\"main-container\"]/div/div[1]/div[3]/div[2]/div[3]/div/div[3]/div[1]/div[2]/input")).click();
+        driver.findElement(By.xpath("//*[@id=\"main-container\"]/div/div[1]/div[3]/div[2]/div[3]/div/div[3]/div[2]/div[2]/div[2]/div[2]/div[2]/div[1]/div[2]/div")).click();        
 	    
 	    /*Date Selection - Departure Date Only*/
         //WebDriverWait explicitlyWait = new WebDriverWait(driver, 3000);	//Deprecated in Selenium-4
